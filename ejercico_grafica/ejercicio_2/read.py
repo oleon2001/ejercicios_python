@@ -1,68 +1,68 @@
 import csv
 
-# Function to read data from a CSV file
-def leer(path):
-    # Open the file in binary read and write mode
-    with open(path, "ab+") as archivo_ventas:
-        # Move the file pointer to the beginning of the file
+# Función para leer datos de un archivo CSV
+def leer_ruta(ruta_archivo):
+    # Abrir el archivo en modo binario de lectura y escritura
+    with open(ruta_archivo, "ab+") as archivo_ventas:
+        # Mover el puntero del archivo al principio del archivo
         archivo_ventas.seek(0)
-        # Create a CSV reader object with a comma delimiter
-        reader = csv.reader(archivo_ventas, delimiter=',')
-        # Initialize an empty list to store the data
-        data = []
-        # Iterate over each row in the CSV file
-        for row in reader:
-            # Append the row to the data list
-            data.append(row)
-        # Return the data list
-        return data
+        # Crear un objeto lector CSV con delimitador de coma
+        lector = csv.reader(archivo_ventas, delimiter=',')
+        # Inicializar una lista vacía para almacenar los datos
+        datos = []
+        # Iterar sobre cada fila en el archivo CSV
+        for fila in lector:
+            # Agregar la fila a la lista de datos
+            datos.append(fila)
+        # Devolver la lista de datos
+        return datos
 
-# Function to write data to a CSV file
-def escribir(path, data):
-    # Open the file in binary read and write mode
-    with open(path, "ab+") as archivo_ventas:
-        # Move the file pointer to the beginning of the file
+# Función para escribir datos en un archivo CSV
+def escribir_datos(ruta_archivo, datos):
+    # Abrir el archivo en modo binario de lectura y escritura
+    with open(ruta_archivo, "ab+") as archivo_ventas:
+        # Mover el puntero del archivo al principio del archivo
         archivo_ventas.seek(0)
-        # Create a CSV writer object with a comma delimiter
-        writer = csv.writer(archivo_ventas, delimiter=',')
-        # Write the data to the CSV file
-        writer.writerows(data)
-        # Return True to indicate success
+        # Crear un objeto escritor CSV con delimitador de coma
+        escritor = csv.writer(archivo_ventas, delimiter=',')
+        # Escribir los datos en el archivo CSV
+        escritor.writerows(datos)
+        # Devolver True para indicar éxito
         return True
 
-# Function to add a new row to a CSV file
-def agregar(path, data):
-    # Open the file in binary read and write mode
-    with open(path, "ab+") as archivo_ventas:
-        # Move the file pointer to the beginning of the file
+# Función para agregar una nueva fila a un archivo CSV
+def agregar_fila(ruta_archivo, datos):
+    # Abrir el archivo en modo binario de lectura y escritura
+    with open(ruta_archivo, "ab+") as archivo_ventas:
+        # Mover el puntero del archivo al principio del archivo
         archivo_ventas.seek(0)
-        # Create a CSV writer object with a comma delimiter
-        writer = csv.writer(archivo_ventas, delimiter=',')
-        # Write the new row to the CSV file
-        writer.writerow(data)
-        # Return True to indicate success
+        # Crear un objeto escritor CSV con delimitador de coma
+        escritor = csv.writer(archivo_ventas, delimiter=',')
+        # Escribir la nueva fila en el archivo CSV
+        escritor.writerow(datos)
+        # Devolver True para indicar éxito
         return True
 
-# Function to delete a row from a CSV file based on an ID
-def eliminar(path, id):
-    # Read the data from the CSV file
-    data = leer(path)
-    # Iterate over each row in the data
-    for i in range(len(data)):
-        # Check if the ID in the current row matches the given ID
-        if data[i][0] == id:
-            # Delete the row from the data list
-            del data[i]
-            # Break out of the loop
+# Función para eliminar una fila de un archivo CSV según un ID
+def eliminar_fila(ruta_archivo, id):
+    # Leer los datos del archivo CSV
+    datos = leer_ruta(ruta_archivo)
+    # Iterar sobre cada fila en los datos
+    for i in range(len(datos)):
+        # Verificar si el ID en la fila actual coincide con el ID dado
+        if datos[i][0] == id:
+            # Eliminar la fila de la lista de datos
+            del datos[i]
+            # Salir del bucle
             break
-    # Write the updated data back to the CSV file
-    escribir(path, data)
-    # Return True to indicate success
+    # Escribir los datos actualizados de vuelta en el archivo CSV
+    escribir_datos(ruta_archivo, datos)
+    # Devolver True para indicar éxito
     return True
 
-def buscar(path,id):
-    data=leer(path)
-    for row in data:
-      if row[0]==id:
-       return row
-        
+# Función para buscar una fila en un archivo CSV según un ID
+def buscar_fila(ruta_archivo, id):
+    datos = leer_ruta(ruta_archivo)
+    for fila in datos:
+      if fila[0] == id:
+       return fila
