@@ -1,7 +1,9 @@
 
-import csv
-import charts
+
 import read
+import charts
+
+
 
 '''
 def leer_datos(ruta_archivo):
@@ -13,21 +15,23 @@ def leer_datos(ruta_archivo):
 '''
 
 def run():
-    ruta_archivo = "ejercicio_2/data_ventas.csv"
+    ruta_archivo = "/home/oleon/Escritorio/ejercicios_python/ejercico_grafica/ejercicio_2/data_ventas.csv"
     data = read.leer(ruta_archivo)
-    mes_elegido = input("Elegí el mes que quieres ver o tipea 'todos': ")
-    if mes_elegido == 'todos':
+    meses_elegidos = input("Elegí el mes que quieres ver (separa por comas si son varios) o tipea 'todos': ")
+    meses_elegidos = [x.strip() for x in meses_elegidos.split(",")]
+    if str(meses_elegidos).capitalize() == 'Todos':
         labels = [x['Mes'] for x in data]
         values = [int(x['Ventas']) for x in data]
         charts.generate_bar_chart(labels, values)
         charts.generate_pie_chart(labels, values)
-    else:
-        resultado = [x for x in data if x['Mes'] == mes_elegido]
+    elif str(meses_elegidos).capitalize() == 'Todos':
+        resultado = [x for x in data if x['Mes'] == meses_elegidos]
         labels = [x['Mes'] for x in resultado]
         values = [int(x['Ventas']) for x in resultado]
         charts.generate_bar_chart(labels, values)
         charts.generate_pie_chart(labels, values)
-    
+    else:
+        print("No se encontraron datos para el mes seleccionado")
 
 if __name__ == '__main__':
     run()

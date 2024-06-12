@@ -4,6 +4,7 @@ import csv
 def leer(ruta_archivo):
     with open(ruta_archivo, "r") as archivo_ventas:
         lector = csv.reader(archivo_ventas, delimiter=',')
+        archivo_ventas.seek(0)
         encabezados = next(lector)
         datos = [dict(zip(encabezados, fila)) for fila in lector]
         return datos
