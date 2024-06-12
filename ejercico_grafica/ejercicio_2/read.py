@@ -1,20 +1,11 @@
 import csv
 
-# Función para leer datos de un archivo CSV
-def leer_ruta(ruta_archivo):
-    # Abrir el archivo en modo binario de lectura y escritura
-    with open(ruta_archivo, "ab+") as archivo_ventas:
-        # Mover el puntero del archivo al principio del archivo
-        archivo_ventas.seek(0)
-        # Crear un objeto lector CSV con delimitador de coma
+
+def leer(ruta_archivo):
+    with open(ruta_archivo, "r") as archivo_ventas:
         lector = csv.reader(archivo_ventas, delimiter=',')
-        # Inicializar una lista vacía para almacenar los datos
-        datos = []
-        # Iterar sobre cada fila en el archivo CSV
-        for fila in lector:
-            # Agregar la fila a la lista de datos
-            datos.append(fila)
-        # Devolver la lista de datos
+        encabezados = next(lector)
+        datos = [dict(zip(encabezados, fila)) for fila in lector]
         return datos
 
 # Función para escribir datos en un archivo CSV
@@ -46,7 +37,7 @@ def agregar_fila(ruta_archivo, datos):
 # Función para eliminar una fila de un archivo CSV según un ID
 def eliminar_fila(ruta_archivo, id):
     # Leer los datos del archivo CSV
-    datos = leer_ruta(ruta_archivo)
+    datos = leer(ruta_archivo)
     # Iterar sobre cada fila en los datos
     for i in range(len(datos)):
         # Verificar si el ID en la fila actual coincide con el ID dado
@@ -62,7 +53,9 @@ def eliminar_fila(ruta_archivo, id):
 
 # Función para buscar una fila en un archivo CSV según un ID
 def buscar_fila(ruta_archivo, id):
-    datos = leer_ruta(ruta_archivo)
+    datos = leer(ruta_archivo)
     for fila in datos:
       if fila[0] == id:
        return fila
+
+
