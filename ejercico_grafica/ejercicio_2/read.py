@@ -1,5 +1,14 @@
 import csv
+import main
 
+ruta_archivo='ejercico_grafica/ejercicio_2/data_ventas.csv'
+with open(ruta_archivo, "r") as archivo_ventas:
+        lector = csv.reader(archivo_ventas, delimiter=',')
+        archivo_ventas.seek(0)
+        encabezados = next(lector)
+        print(encabezados)
+
+        
 
 def leer(ruta_archivo):
     with open(ruta_archivo, "r") as archivo_ventas:
@@ -60,3 +69,5 @@ def buscar_fila(ruta_archivo, id):
        return fila
 
 
+if __name__ == '__main__':
+    main.run()

@@ -18,13 +18,13 @@ def run():
     ruta_archivo = "/home/oleon/Escritorio/ejercicios_python/ejercico_grafica/ejercicio_2/data_ventas.csv"
     data = read.leer(ruta_archivo)
     meses_elegidos = input("Elegí el mes que quieres ver (separa por comas si son varios) o tipea 'todos': ")
-    meses_elegidos = [x.strip() for x in meses_elegidos.split(",")]
+    #meses_elegidos = [x.strip() for x in meses_elegidos.split(",")]
     if str(meses_elegidos).capitalize() == 'Todos':
         labels = [x['Mes'] for x in data]
         values = [int(x['Ventas']) for x in data]
         charts.generate_bar_chart(labels, values)
-        charts.generate_pie_chart(labels, values)
-    elif str(meses_elegidos).capitalize() == 'Todos':
+        charts.generate_pie_chart(labels, values)    
+    elif str(meses_elegidos).capitalize() != 'Todos':
         resultado = [x for x in data if x['Mes'] == meses_elegidos]
         labels = [x['Mes'] for x in resultado]
         values = [int(x['Ventas']) for x in resultado]
