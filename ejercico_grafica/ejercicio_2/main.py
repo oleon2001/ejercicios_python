@@ -29,6 +29,7 @@ def run():
     if meses_elegidos== ['Todos']:
         labels = [x['Mes'] for x in data]
         values = [int(x['Ventas']) for x in data]
+        #values=list(map(lambda x:x['Ventas'],data))
         charts.generate_bar_chart(labels, values)
         charts.generate_pie_chart(labels, values)
     else:
